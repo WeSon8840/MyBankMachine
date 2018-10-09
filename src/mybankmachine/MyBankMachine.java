@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *  
  */
 package mybankmachine;
 import javax.swing.JOptionPane;
@@ -27,38 +25,36 @@ public class MyBankMachine {
                     } 
                 catch (Exception e) {// failsafe
                     if (e instanceof NumberFormatException) {
-                        JOptionPane.showMessageDialog(null,"You must enter a valid number to deposit.");
+                        JOptionPane.showMessageDialog(null,"You must enter a valid number to deposit." );
                             break;
                         }
-                        JOptionPane.showMessageDialog(null,"You can't deposit more than $200");
                     }
-                    break;
-                
+
             case "2":
             // withdraw
-                    try {
-                        MyBankMachine.bank
-                                .withdraw(Double.parseDouble(JOptionPane
-                                        .showInputDialog("How much would you like to withdraw?")));
-                    } catch (Exception e) {
-                        if (e instanceof NumberFormatException) {
-                            JOptionPane
-                                    .showMessageDialog(null, "You must enter a valid number to withdraw.");
+                try {
+                    MyBankMachine.bank.withdraw(Double.parseDouble(JOptionPane.showInputDialog("How much would you like to withdraw?")));
+                    }
+                catch (Exception e) {
+                    if (e instanceof NumberFormatException) {
+                        JOptionPane.showMessageDialog(null, "You must enter a valid number to withdraw.");
                             break;
                         }
                         JOptionPane.showMessageDialog(null,"You have exceeded you maximum withdraw limit of: "
                                         + MyBankMachine.bank.getBalance());
                     }
                     break;
-                case "3":
-                    // balance
-                    JOptionPane.showMessageDialog(null,
-                                "Your balance is: " + MyBankMachine.bank.getBalance());
+                
+            case "3":
+            // balance
+                JOptionPane.showMessageDialog(null,"The bank name : RBC Royal Bank\n" +
+                        "Your balance is: " + MyBankMachine.bank.getBalance());
+                
                     break;
-                case "4":
-                    // calculate intrest
-                    double P = Double.parseDouble(JOptionPane
-                                    .showInputDialog("How much would you like to start with?"));
+                
+            case "4":
+            //calculate intrest
+                double P = Double.parseDouble(JOptionPane.showInputDialog("How much would you like to start with?"));
                     if (P > MyBankMachine.bank.getBalance()) {
                         JOptionPane.showMessageDialog(null,"You have exceeded you maximum balance of: "
                                         + MyBankMachine.bank.getBalance());
@@ -69,7 +65,9 @@ public class MyBankMachine {
                     double intrest = P * Math.pow((1 + rateYearly/100.0/365.05), days);
                     JOptionPane.showMessageDialog(null, "You have gained $" + intrest + " of intrest over " + days + " days.");
                     break;
-                case "5":// exit
+                
+            case "5":
+            // exit
                     System.exit(0);
                     break;
             }
