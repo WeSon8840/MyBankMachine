@@ -31,7 +31,8 @@ public class MyBankMachine {
                                                 break;
                     }
                 } 
-                catch (Exception e) {// failsafe
+                catch (Exception e) {
+                // failsafe
                     if (e instanceof NumberFormatException) {
                         JOptionPane.showMessageDialog(null,"You must enter a valid number to deposit." );
                             break;
