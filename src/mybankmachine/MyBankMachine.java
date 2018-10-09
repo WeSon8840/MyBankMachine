@@ -14,15 +14,23 @@ public class MyBankMachine {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-         while (true) {
+        while (true) {
             String option = JOptionPane.showInputDialog("Would you like to:\n1. Deposit\n2. Withdraw\n3. View your balance.\n4. Set up intrest\n5. Exit");
             
         switch (option) {
             case "1":
             // deposit
                 try {
-                    MyBankMachine.bank.deposit(Double.parseDouble(JOptionPane.showInputDialog("How much would you like to deposit?")));
-                    } 
+                    double depositeMoney =Double.parseDouble(JOptionPane.showInputDialog("How much would you like to deposit?"));
+                    if (depositeMoney>200){JOptionPane.showMessageDialog(null,"Deposit exceed 200.\nThe bank name : RBC Royal Bank\n" +
+                        "Your balance is: " + MyBankMachine.bank.getBalance());
+                    break;}
+                    else {                    MyBankMachine.bank.deposit(depositeMoney);
+                    JOptionPane.showMessageDialog(null,"The bank name : RBC Royal Bank\n" +
+                        "Your balance is: " + MyBankMachine.bank.getBalance());
+                                                break;
+                    }
+                } 
                 catch (Exception e) {// failsafe
                     if (e instanceof NumberFormatException) {
                         JOptionPane.showMessageDialog(null,"You must enter a valid number to deposit." );
@@ -33,8 +41,17 @@ public class MyBankMachine {
             case "2":
             // withdraw
                 try {
-                    MyBankMachine.bank.withdraw(Double.parseDouble(JOptionPane.showInputDialog("How much would you like to withdraw?")));
+                    double withdrawMoney=Double.parseDouble(JOptionPane.showInputDialog("How much would you like to withdraw?"));
+                    if (withdrawMoney>MyBankMachine.bank.getBalance()) {JOptionPane.showMessageDialog(null, "Maximum withdrawal reached!");
+                    break;
                     }
+                    else {
+                    MyBankMachine.bank.withdraw(withdrawMoney);
+                                        JOptionPane.showMessageDialog(null,"The bank name : RBC Royal Bank\n" +
+                        "Your balance is: " + MyBankMachine.bank.getBalance());
+                                                break;
+                    }
+                }
                 catch (Exception e) {
                     if (e instanceof NumberFormatException) {
                         JOptionPane.showMessageDialog(null, "You must enter a valid number to withdraw.");
